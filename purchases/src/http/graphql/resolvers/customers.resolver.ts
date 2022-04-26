@@ -17,7 +17,7 @@ export class CustomersResolver {
   ) { }
 
   @Query(() => [Customer])
-  // @UseGuards(AuthorizationGuard)
+  @UseGuards(AuthorizationGuard)
   me(
     @CurrentUser() user: AuthUser
   ) {
