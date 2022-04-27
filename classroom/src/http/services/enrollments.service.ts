@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma/prisma.service";
+import { CreateEnrollmentParams } from "../interfaces/CreateEnrollmentParams.interface";
 import { GetByCourseAndStudentIdParams } from "../interfaces/GetByCourseAndStudentIdParams.interface";
 
 @Injectable()
@@ -40,6 +41,15 @@ export class EnrollmentsService {
       },
       orderBy: {
         createdAt: 'desc'
+      }
+    })
+  }
+
+  creatEnrollment({ courseId, studentId }: CreateEnrollmentParams) {
+    return this.prisma.enrollment.create({
+      data: {
+        courseId,
+        studentId
       }
     })
   }

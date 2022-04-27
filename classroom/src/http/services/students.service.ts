@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma/prisma.service";
+import { CreateStudentParams } from "../interfaces/CreateStudentParams.interface";
 
 @Injectable()
 export class StudentsService {
@@ -22,6 +23,14 @@ export class StudentsService {
   getStudentById(id: string) {
     return this.prisma.students.findUnique({
       where: { id }
+    })
+  }
+
+  createStudent({ authUserId }: CreateStudentParams) {
+    return this.prisma.students.create({
+      data: {
+        authUserId
+      }
     })
   }
 }
